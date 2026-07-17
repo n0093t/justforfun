@@ -1,13 +1,19 @@
-function getIP() {
-  fetch(
-    url,
-    {
-      method: "GET",
+async function getIP() {
+    let response = await fetch(
+        "https://api.ipify.org",
+        {
+            method: "GET",
+        }
+    )
+    .catch(() => {});
+
+    if (response.ok) {
+        return await response.text();
+    } else {
+        return "can\'t get ip";
     }
-  )
-  .then(response => console.log('Response:', result))
-  .then(result => console.log('Success:', result))
-  .catch(error => console.error('Error:', error));
 }
 
-getIP();
+let ipAddr = await getIP();
+
+console.log(ipAddr);
